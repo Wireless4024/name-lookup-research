@@ -72,7 +72,7 @@ fn run<I: Send + Sync + 'static, K: Send + Sync + 'static>(
     // safe as long as code don't panic
     let iter: &'static [I] = unsafe { std::slice::from_raw_parts(iter.as_ptr(), amount) };
     let cpus = num_cpus::get();
-    let mut chunks = iter.chunks(amount / cpus);
+    let mut chunks = iter.chunks((amount + cpus) / cpus);
     let (tx, rx) = std::sync::mpsc::channel::<K>();
     for _ in 0..cpus {
         let mut buffer = init();
