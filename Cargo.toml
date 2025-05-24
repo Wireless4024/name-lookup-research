@@ -1,0 +1,24 @@
+[package]
+name = "name-lookup"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ahash = "0.8"
+rayon = "1.10"
+rand = "0.9"
+num_cpus = "1.16"
+
+[[bench]]
+name = "hashset_raw"
+path = "benches/hashset_raw.rs"
+[[bench]]
+name = "bpe_set"
+path = "benches/bpe_set.rs"
+
+
+[profile.dev]
+opt-level = 3
+debug-assertions = false
+overflow-checks = false
+codegen-units = 1
